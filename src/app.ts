@@ -36,13 +36,13 @@ export const createApp = () => {
   if (!process.env.DEBUG) {
     app.use(morgan('dev'));
   }
-  // función middleware de express que habilita el parseo automático de los archivos json.
+  // Función middleware de express que habilita el parseo automático de los archivos json.
   // (https://expressjs.com/en/5x/api.html#express.json)
   app.use(express.json());
-  // función middleware de express que aplica modificadores al parseo de las URL .
+  // Función middleware de express que aplica modificadores al parseo de las URL .
   // (https://expressjs.com/en/5x/api.html#express.urlencoded), (https://expressjs.com/en/resources/middleware/body-parser.html)
   app.use(bodyParser.urlencoded({ extended: true }));
-  // función definida en la carpeta middleware
+  // Función definida en la carpeta middleware
   app.use(debugLogger('debug-logger'));
   // función middleware de express que habilita servir como estáticos la carpeta indicada.
   // (https://expressjs.com/en/5x/api.html#example.of.express.static)
