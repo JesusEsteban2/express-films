@@ -11,7 +11,7 @@ import {
 } from './controllers/base.controller.js';
 
 import { errorManager } from './controllers/errors.controller.js';
-import { FilmPrismaRepo } from './repo/filmsrepository.js';
+import { filmsRouter } from './router/ film.router.js';
 
 // import { createProductsRouter } from './routers/products.router.js';
 // import { HomePage } from './views/pages/home-page.js';
@@ -49,15 +49,9 @@ export const createApp = () => {
     // (https://expressjs.com/en/5x/api.html#example.of.express.static)
     app.use(express.static(publicPath));
 
-    const repoFilms = new FilmPrismaRepo();
-
     // Routes
 
-    app.get('/api/films', repoFilms.read());
-    app.get('/api/films/id', repoFilms.readById);
-    app.post('/api/films', repoFilms.create);
-    app.patch('/api/films/:id', repoFilms.update);
-    app.delete('/api/films/:id', repoFilms.delete);
+    app.use('/apì/films', filmsRouter);
 
     // const homeView = new HomePage();
     // const homeController = new HomeController(homeView);

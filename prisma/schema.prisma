@@ -14,9 +14,9 @@ datasource db {
 }
 
 model Film {
-    id              String      @id @default(uuid()) @map("film_id")
+    id              String      @id @default(uuid()) @map("id")
     title           String
-    description     String
+    description     String      
     releaseYear     Int         @map("release_year")
     rating          Decimal
     director        String

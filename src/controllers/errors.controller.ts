@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import createDebug from 'debug';
-import { AppRespose } from '../middleware/responseJson';
+import { AppResponse } from '../middleware/responseJson.js';
 
 const debug = createDebug('films:errorManager');
 
@@ -36,7 +36,7 @@ export const errorManager = (
 
     res.status(err.statusCode);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    const response: AppRespose<string> = {
+    const response: AppResponse<string> = {
         data: [],
         error: 'Error: ' + err.statusCode + ' ' + err.status,
     };
