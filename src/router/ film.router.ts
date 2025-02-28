@@ -9,15 +9,15 @@ export const filmsRouter = Router();
 const repoFilms: Repository<Film> = new FilmPrismaRepo();
 const filmsController = new FilmsController(repoFilms);
 
-filmsRouter.get('/', filmsController.getAll);
+filmsRouter.get('/', filmsController.getAll.bind(filmsController));
 
-filmsRouter.get('/:id', filmsController.getById);
+filmsRouter.get('/:id', filmsController.getById.bind(filmsController));
 
-filmsRouter.post('/', filmsController.post);
+filmsRouter.post('/', filmsController.post.bind(filmsController));
 
-filmsRouter.patch('/:id', filmsController.patch);
+filmsRouter.patch('/:id', filmsController.patch.bind(filmsController));
 
-filmsRouter.delete('/:id', filmsController.delete);
+filmsRouter.delete('/:id', filmsController.delete.bind(filmsController));
 
 // Sustituye a las líneas de app
 // app.get('/api/films', repoFilms.read);

@@ -1,3 +1,4 @@
+Script SQL para inicialiar la BB
 INSERT INTO movies.films (film_id, title, release_year, director, duration, rating, poster)
 VALUES
 ( UUID(), 'The Shawshank Redemption', 1994, 'Frank Darabont', 142, 9.3, 'https://www.imdb.com/title/tt0111161/'),

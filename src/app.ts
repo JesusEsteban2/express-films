@@ -9,7 +9,6 @@ import {
     notFoundController,
     notMethodController,
 } from './controllers/base.controller.js';
-
 import { errorManager } from './controllers/errors.controller.js';
 import { filmsRouter } from './router/ film.router.js';
 
@@ -51,7 +50,7 @@ export const createApp = () => {
 
     // Routes
 
-    app.use('/apì/films', filmsRouter);
+    app.use('/api/films', filmsRouter);
 
     // const homeView = new HomePage();
     // const homeController = new HomeController(homeView);

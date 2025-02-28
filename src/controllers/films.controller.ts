@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Film } from '@prisma/client';
 import { Repository } from '../repo/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
+import debug from 'debug';
 
 export class FilmsController {
     constructor(private repoFilms: Repository<Film>) {}
@@ -20,6 +21,7 @@ export class FilmsController {
     }
 
     async getById(req: Request, res: Response, next: NextFunction) {
+        debug('getById');
         try {
             const { id } = req.params;
             const films = await this.repoFilms.readById(id);
