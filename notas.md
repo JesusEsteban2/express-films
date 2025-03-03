@@ -28,3 +28,30 @@ VALUES
 ( UUID(), 'The Departed', 2006, 'Martin Scorsese', 151, 8.5, 'https://www.imdb.com/title/tt0407887/'),
 ( UUID(), 'The Prestige', 2006, 'Christopher Nolan', 130, 8.5, 'https://www.imdb.com/title/tt0482571/'),
 ( UUID(), 'The Intouchables', 2011, 'Olivier Nakache, Éric Toledano', 112, 8.5, 'https://www.imdb.com/title/tt1675434/');
+
+## Campos calculados en la BBDD con Prisma
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient().$extends({
+  result: {
+    user: {
+      fullName: {
+        needs: { firstName: true, lastName: true },
+        compute(user) {
+          return `${user.firstName} ${user.lastName}`
+},
+},
+},
+},
+})
+
+async function main() {
+/\*\*
+
+- Example query containing the `fullName` computed field in the response
+  \*/
+  const user = await prisma.user.findFirst()
+  }
+
+main()
