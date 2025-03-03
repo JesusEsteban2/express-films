@@ -55,3 +55,6 @@ async function main() {
   }
 
 main()
+
+instalación de Bcript.JS
+    npm i bcryptjs

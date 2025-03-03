@@ -11,6 +11,7 @@ import {
 } from './controllers/base.controller.js';
 import { errorManager } from './controllers/errors.controller.js';
 import { filmsRouter } from './router/ film.router.js';
+import { userRouter } from './router/users.router.js';
 
 // import { createProductsRouter } from './routers/products.router.js';
 // import { HomePage } from './views/pages/home-page.js';
@@ -49,7 +50,7 @@ export const createApp = () => {
     app.use(express.static(publicPath));
 
     // Routes
-
+    app.use('/api/users', userRouter);
     app.use('/api/films', filmsRouter);
 
     // const homeView = new HomePage();
