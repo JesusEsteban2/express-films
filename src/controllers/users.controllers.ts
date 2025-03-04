@@ -1,18 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import { Film, User } from '@prisma/client';
-import { Repository, UserRepo } from '../repo/repositorytype.js';
+import { User } from '@prisma/client';
+import { UserRepo } from '../repo/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
-import debug from 'debug';
+import { UserCreateDTO, UserLoginDTO } from '../../DTO/users.dto.js';
 
 export class UsersController {
     constructor(private repoUser: UserRepo<User>) {}
 
-    async post(req: Request, res: Response, next: NextFunction) {
+    async register(req: Request, res: Response, next: NextFunction) {
         try {
             const { body } = req.body;
-            const films = await this.repoFilms.create(body);
-            const data: AppResponse<Film> = {
-                data: [films],
+            UserCreateDTO.parse(body);
+            const user = await this.repoUser.register(body);
+            const data: AppResponse<User> = {
+                data: [user],
                 error: '',
             };
             res.json(data);
@@ -24,9 +25,10 @@ export class UsersController {
     async login(req: Request, res: Response, next: NextFunction) {
         try {
             const { body } = req.body;
-            const films = await this.repoFilms.create(body);
-            const data: AppResponse<Film> = {
-                data: [films],
+            UserLoginDTO.parse(body);
+            const user = await this.repoUser.login(body.email, body.password);
+            const data: AppResponse<User> = {
+                data: [user],
                 error: '',
             };
             res.json(data);

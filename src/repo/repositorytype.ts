@@ -12,5 +12,6 @@ export interface Repository<T> {
 }
 
 export interface UserRepo<T> {
-    create: (data: Omit<T, 'id'>) => Promise<T>;
+    register: (data: T) => Promise<T>;
+    login: (email: string, pass: string) => Promise<T>;
 }

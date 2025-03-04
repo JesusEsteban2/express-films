@@ -9,5 +9,5 @@ export const userRouter = Router();
 const userRepo: UserRepo<User> = new UserRepository();
 const userController = new UsersController(userRepo);
 
-userRouter.post('/', userController.post.bind(userController));
+userRouter.post('/', userController.register.bind(userController));
 userRouter.post('/login', userController.login.bind(userController));

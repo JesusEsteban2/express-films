@@ -1,5 +1,5 @@
 import createDebug from 'debug';
-import type { Repository } from './repositorytype';
+import type { UserRepo } from './repositorytype';
 import { PrismaClient, User } from '@prisma/client';
 
 const debug = createDebug('films:repository:films');
@@ -7,14 +7,24 @@ const debug = createDebug('films:repository:films');
 export class UserRepository implements UserRepo<User> {
     prisma: PrismaClient;
     constructor() {
-        debug('Instancite repo for films');
+        debug('Instance repo for User');
         this.prisma = new PrismaClient();
     }
 
-    async create(data: Omit<Film, 'id'>): Promise<Film> {
-        const row = await this.prisma.film.create({
+    async register(data: User): Promise<User> {
+        const row = await this.prisma.user.create({
             data,
         });
+        return row;
+    }
+
+    async login(email: string, password: string): Promise<User> {
+        const row = await this.prisma.user.findUnique({
+            where: { email },
+        });
+        if (!row) {
+            throw new Error('Usuario no encontrado');
+        }
         return row;
     }
 }
