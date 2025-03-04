@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { User } from '@prisma/client';
 import { UserRepo } from '../repo/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
-import { UserCreateDTO, UserLoginDTO } from '../../DTO/users.dto.js';
+import { UserCreateDTO, UserLoginDTO } from '../DTO/users.dto.js';
 
 export class UsersController {
     constructor(private repoUser: UserRepo<User>) {}
