@@ -26,15 +26,15 @@ model Film {
   @@map("films")
 }
 
-model Notes {
-  id       String   @id @default(uuid())
-  content  String
-  createAt DateTime @default(now()) @ignore
-  updateAt DateTime @updatedAt @ignore
+// model Notes {
+//   id       String   @id @default(uuid())
+//   content  String
+//   createAt DateTime @default(now()) @ignore
+//   updateAt DateTime @updatedAt @ignore
 
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
-}
+//   User   User?   @relation(fields: [userId], references: [id])
+//   userId String?
+// }
 
 model User {
   id          String   @id @unique @default(uuid()) @map("id")
@@ -46,21 +46,17 @@ model User {
   createAt    DateTime @default(now()) @ignore
   updateAt    DateTime @updatedAt @ignore
 
-  notes     Notes[]
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String
-
   @@index([email])
   @@map("users")
 }
 
-model Profile {
-  id   String @id @unique @default(uuid())
-  bio  String
-  User User[]
+// model Profile {
+//   id   String @id @unique @default(uuid())
+//   bio  String
+//   User User[]
 
-  @@map("profiles")
-}
+//   @@map("profiles")
+// }
 
 model Categories {
   id     String @id @unique @default(uuid())
