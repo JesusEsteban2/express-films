@@ -11,7 +11,7 @@ export class AuthInterceptor {
     }
 
     authenticate = async (req: Request, _res: Response, next: NextFunction) => {
-        debug('authenticate');
+        debug('authenticate Token');
 
         //req.cookies
         const { authorization } = req.headers;

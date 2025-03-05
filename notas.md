@@ -57,4 +57,13 @@ async function main() {
 main()
 
 instalación de Bcript.JS
-    npm i bcryptjs
+npm i bcryptjs
+
+https://www.micvideal.es/
+
+irene.marin@cas-trainig.com
+
+Enviar cokie o token.
+
+res.cookie('token', token);
+res.json(this.makeResponse([response]));

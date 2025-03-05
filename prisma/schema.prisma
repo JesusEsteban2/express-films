@@ -35,6 +35,11 @@ model Film {
 //   User   User?   @relation(fields: [userId], references: [id])
 //   userId String?
 // }
+enum Role {
+    USER
+    EDITOR
+    ADMIN
+}
 
 model User {
   id          String   @id @unique @default(uuid()) @map("id")
@@ -43,6 +48,7 @@ model User {
   password    String
   firstName   String
   lastName    String
+  role        Role     @default(USER)
   createAt    DateTime @default(now()) @ignore
   updateAt    DateTime @updatedAt @ignore
 
