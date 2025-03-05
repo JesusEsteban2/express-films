@@ -10,3 +10,5 @@ export class AppResponse<T> {
         public error: string,
     ) {}
 }
+
+//public data: Omit<T, 'password'>[],
