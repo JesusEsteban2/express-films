@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 const SALTS = 10;
 
-export interface Payload extends JwtPayload {
+export interface MPayload extends JwtPayload {
     id: string;
     email: string;
 }
@@ -20,17 +20,17 @@ export class AuthService {
         return compare(password, hash);
     }
 
-    static async generateToken(payload: Payload) {
+    static async generateToken(payload: MPayload) {
         const secret = process.env.JWT_SECRET as string;
         return jwt.sign(payload, secret);
     }
 
-    static async verifyToken(token: string): Promise<Payload> {
+    static async verifyToken(token: string): Promise<MPayload> {
         const secret = process.env.JWT_SECRET as string;
         const result = jwt.verify(token, secret);
         if (typeof result === 'string') {
             throw new Error('Token no válido');
         }
-        return result as Payload;
+        return result as MPayload;
     }
 }

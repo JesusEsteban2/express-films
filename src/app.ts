@@ -12,7 +12,7 @@ import {
 import { errorManager } from './controllers/errors.controller.js';
 import { filmsRouter } from './router/ film.router.js';
 import { userRouter } from './router/users.router.js';
-import MPayload from './services/auth.service.js';
+import { MPayload } from './services/auth.service.js';
 
 // import { createProductsRouter } from './routers/products.router.js';
 // import { HomePage } from './views/pages/home-page.js';
