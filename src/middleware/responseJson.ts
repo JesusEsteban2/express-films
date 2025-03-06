@@ -6,7 +6,7 @@
 
 export class AppResponse<T> {
     constructor(
-        public data: T[],
+        public data: Partial<T>[],
         public error: string,
     ) {}
 }
