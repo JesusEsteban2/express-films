@@ -12,9 +12,17 @@ import {
 import { errorManager } from './controllers/errors.controller.js';
 import { filmsRouter } from './router/ film.router.js';
 import { userRouter } from './router/users.router.js';
+import MPayload from './services/auth.service.js';
 
 // import { createProductsRouter } from './routers/products.router.js';
 // import { HomePage } from './views/pages/home-page.js';
+
+// Expansión de interface Request
+declare module 'express' {
+    interface Request {
+        user?: MPayload;
+    }
+}
 
 const debug = createDebug('films:app');
 debug('Loaded module');
@@ -37,6 +45,7 @@ export const createApp = () => {
     if (!process.env.DEBUG) {
         app.use(morgan('dev'));
     }
+
     // Función middleware de express que habilita el parseo automático de los archivos json.
     // (https://expressjs.com/en/5x/api.html#express.json)
     app.use(express.json());

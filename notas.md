@@ -67,3 +67,14 @@ Enviar cokie o token.
 
 res.cookie('token', token);
 res.json(this.makeResponse([response]));
+
+leer datos de form de request.
+
+Extension de clases
+declare module 'express' {
+interface Request {
+user?:Payload;
+}
+}
+
+HTML,CSS,Javascript,Angular, Typescript,NodeJS,Express,NestJs,Prisma, Zod, MySQL,MongoDB, Git, Github, Visual Studio Code, Postman, integración, vitest, Swagger.

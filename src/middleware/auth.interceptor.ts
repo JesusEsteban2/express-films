@@ -19,8 +19,8 @@ export class AuthInterceptor {
         if (!authorization || authorization.includes('Bearer') === false) {
             const newError = new HttpError(
                 'Token not found',
-                498,
-                'Token invalid',
+                401,
+                'Unauthorized',
             );
             next(newError);
             return;
@@ -33,8 +33,8 @@ export class AuthInterceptor {
         } catch (err) {
             const newError = new HttpError(
                 (err as Error).message,
-                498,
-                'Token invalid',
+                401,
+                'Unauthorized',
             );
             next(newError);
         }
