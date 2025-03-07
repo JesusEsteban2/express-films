@@ -19,7 +19,8 @@ model Film {
   updatedAt   DateTime? @updatedAt
   id          String    @id @default(uuid()) @map("id")
 
-  categories Categories[]
+  //categories Categories[]
+  Review Review[]
 
   @@unique([title, releaseYear])
   @@index([title])
@@ -37,9 +38,9 @@ model Film {
 // }
 
 enum Role {
-    USER
-    EDITOR
-    ADMIN
+  USER
+  EDITOR
+  ADMIN
 }
 
 model User {
@@ -52,6 +53,7 @@ model User {
   role        Role     @default(USER)
   createAt    DateTime @default(now()) @ignore
   updateAt    DateTime @updatedAt @ignore
+  Review      Review[]
 
   @@index([email])
   @@map("users")
