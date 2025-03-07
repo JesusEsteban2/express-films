@@ -6,7 +6,7 @@ import createDebug from 'debug';
 const debug = createDebug('films:interceptors:auth');
 
 export class AuthInterceptor {
-    constructor() {
+    constructor(reviewRepo: ReviewRepo) {
         debug('Instanciando');
     }
 
@@ -39,4 +39,27 @@ export class AuthInterceptor {
             next(newError);
         }
     };
+
+    hasRole = (role: Role) => {
+        return (req: Request, _res: Response, next: NextFunction) => {
+            debug('hasRole');
+
+            if (
+                !req.user ||
+                (req.user.role !== role && req.user.role !== Role.ADMIN)
+            ) {
+                const newError = new HttpError(
+                    'You do not have permission',
+                    403,
+                    'Forbidden',
+                );
+                next(newError);
+                return;
+            }
+
+            next();
+        };
+    };
+
+    isOwner = (idItem) => {};
 }

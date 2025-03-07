@@ -65,11 +65,24 @@ model User {
 //   @@map("profiles")
 // }
 
-model Categories {
-  id     String @id @unique @default(uuid())
-  nombre String
+// model Categories {
+//   id     String @id @unique @default(uuid())
+//   nombre String
 
-  film Film[]
+//   film Film[]
 
-  @@map("categories")
+//   @@map("categories")
+// }
+
+model Review {
+  id         String @id @default(uuid()) @map("review_id")
+  filmId     String @map("film_id")
+  userId     String @map("user_id")
+  film       Film   @relation(fields: [filmId], references: [id])
+  user       User   @relation(fields: [userId], references: [id])
+  content    String
+  userRating Int    @default(0) @map("rating")
+
+  @@unique([filmId, userId])
+  @@map("review_user_film")
 }
