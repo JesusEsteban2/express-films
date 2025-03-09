@@ -10,9 +10,8 @@ import {
     notMethodController,
 } from './controllers/base.controller.js';
 import { errorManager } from './controllers/errors.controller.js';
-import { filmsRouter } from './router/ film.router.js';
-import { userRouter } from './router/users.router.js';
 import { MPayload } from './services/auth.service.js';
+import { CreateRouter } from './router/create.router.js';
 
 // import { createProductsRouter } from './routers/products.router.js';
 // import { HomePage } from './views/pages/home-page.js';
@@ -58,9 +57,15 @@ export const createApp = () => {
     // (https://expressjs.com/en/5x/api.html#example.of.express.static)
     app.use(express.static(publicPath));
 
-    // Routes
-    app.use('/api/users', userRouter);
-    app.use('/api/films', filmsRouter);
+    /* App Routes */
+    // Reviews
+    const createRouter = new CreateRouter();
+
+    app.use('/api/review', createRouter.createReviewRouter());
+    // User
+    app.use('/api/users', createRouter.createUsersRouter());
+    // Film
+    app.use('/api/films', createRouter.createFilmRouter());
 
     // const homeView = new HomePage();
     // const homeController = new HomeController(homeView);

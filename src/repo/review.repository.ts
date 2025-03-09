@@ -1,8 +1,8 @@
 import createDebug from 'debug';
-import type { Repository } from './repository.type.js';
+import type { Repository } from '../repo/repositorytype.js';
 import { PrismaClient } from '@prisma/client';
 import { Review } from '@prisma/client';
-import { ReviewCreateDTO, ReviewUpdateDTO } from '../dto/reviews.dto.js';
+import { ReviewCreateDTO, ReviewUpdateDTO } from '../DTO/review.dto.js';
 
 const debug = createDebug('movies:repository:reviews');
 

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { Review } from '@prisma/client';
-import { Repository } from '../repo/repository.type.js';
-import { AppResponse } from '../types/app-response.js';
+import { Repository } from '../repo/repositorytype.js';
+import { AppResponse } from '../middleware/responseJson.js';
 import createDebug from 'debug';
-import { ReviewCreateDTO, ReviewUpdateDTO } from '../dto/reviews.dto.js';
+import { ReviewCreateDTO, ReviewUpdateDTO } from '../DTO/review.dto.js';
 
 const debug = createDebug('movies:controller:reviews');
 
@@ -14,7 +14,7 @@ export class ReviewsController {
 
     private makeResponse(results: Review[]) {
         const data: AppResponse<Review> = {
-            results,
+            data: results,
             error: '',
         };
         return data;
