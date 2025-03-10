@@ -66,6 +66,8 @@ export const createApp = () => {
     app.use('/api/users', createRouter.createUsersRouter());
     // Film
     app.use('/api/films', createRouter.createFilmRouter());
+    // Category
+    app.use('/api/category', createRouter.createCategoryRouter());
 
     // const homeView = new HomePage();
     // const homeController = new HomeController(homeView);

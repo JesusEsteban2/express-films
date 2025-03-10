@@ -21,3 +21,6 @@ instalar bcryptjs
 npm i bcryptjs
 
 import {hash, compare} from 'bcryptjs';
+
+logger de Servidor
+paquete 'Morgan' o 'Winston' o 'Pino'

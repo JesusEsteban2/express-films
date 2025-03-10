@@ -6,9 +6,11 @@ import { ReviewRepo } from '../repo/review.repository.js';
 import { ReviewsController } from '../controllers/review.controller.js';
 import { AuthInterceptor } from '../middleware/auth.interceptor.js';
 import { UserRepo } from '../repo/repositorytype.js';
-import { User } from '@prisma/client';
+import { Role, User } from '@prisma/client';
 import { UserRepository } from '../repo/users.repo.js';
 import { UsersController } from '../controllers/users.controllers.js';
+import { CategoryPrismaRepo } from '../repo/categories.repo.js';
+import { CategoriesController } from '../controllers/category.controller.js';
 
 const debug = createDebug('movies:router:createRouters');
 
@@ -21,6 +23,9 @@ const filmsControl = new FilmsController(filmRepo);
 
 const userRepo: UserRepo<User> = new UserRepository();
 const userController = new UsersController(userRepo);
+
+const categoriesRepo = new CategoryPrismaRepo();
+const categoriesControl = new CategoriesController(categoriesRepo);
 
 export class CreateRouter {
     constructor() {}
@@ -66,13 +71,66 @@ export class CreateRouter {
 
         filmsRouter.get('/:id', filmsControl.getById.bind(filmsControl));
 
-        filmsRouter.post('/', filmsControl.post.bind(filmsControl));
+        filmsRouter.post(
+            '/',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            filmsControl.post.bind(filmsControl),
+        );
 
-        filmsRouter.patch('/:id', filmsControl.patch.bind(filmsControl));
+        filmsRouter.patch(
+            '/:id',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            filmsControl.patch.bind(filmsControl),
+        );
 
-        filmsRouter.delete('/:id', filmsControl.delete.bind(filmsControl));
+        filmsRouter.delete(
+            '/:id',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            filmsControl.delete.bind(filmsControl),
+        );
 
         return filmsRouter;
+    }
+
+    createCategoryRouter() {
+        debug('Ejecutando createCategoryRouter');
+        const categoriesRouter = Router();
+
+        categoriesRouter.get(
+            '/',
+            categoriesControl.getAll.bind(categoriesControl),
+        );
+
+        categoriesRouter.get(
+            '/:id',
+            categoriesControl.getById.bind(categoriesControl),
+        );
+
+        categoriesRouter.post(
+            '/',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            categoriesControl.post.bind(categoriesControl),
+        );
+
+        categoriesRouter.patch(
+            '/:id',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            categoriesControl.patch.bind(categoriesControl),
+        );
+
+        categoriesRouter.delete(
+            '/:id',
+            auth.authenticate,
+            auth.hasRole(Role.EDITOR),
+            categoriesControl.delete.bind(categoriesControl),
+        );
+
+        return categoriesRouter;
     }
 }
 

@@ -47,7 +47,7 @@ export class AuthInterceptor {
         }
     };
 
-    hasRole = (role: Role) => {
+    hasRole = (role: string) => {
         return (req: Request, _res: Response, next: NextFunction) => {
             debug('hasRole');
 

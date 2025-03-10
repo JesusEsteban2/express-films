@@ -19,7 +19,7 @@ model Film {
   updatedAt   DateTime? @updatedAt
   id          String    @id @default(uuid()) @map("id")
 
-  //categories Categories[]
+  category Category[]
   Review Review[]
 
   @@unique([title, releaseYear])
@@ -67,14 +67,14 @@ model User {
 //   @@map("profiles")
 // }
 
-// model Categories {
-//   id     String @id @unique @default(uuid())
-//   nombre String
+model Category {
+  id     Int    @id @unique @map("category_id")
+  nombre String @unique
 
-//   film Film[]
+  film Film[]
 
-//   @@map("categories")
-// }
+  @@map("categories")
+}
 
 model Review {
   id         String @id @default(uuid()) @map("review_id")
