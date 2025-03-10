@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { Category } from '@prisma/client';
-import { Repository2 } from '../repo/repositorytype.js';
+import { Repository } from '../repo/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
 import debug from 'debug';
 
 export class CategoriesController {
-    constructor(private repoCategories: Repository2<Category>) {}
+    constructor(private repoCategories: Repository<Category>) {}
 
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {

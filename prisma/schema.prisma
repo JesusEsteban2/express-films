@@ -68,7 +68,7 @@ model User {
 // }
 
 model Category {
-  id     Int    @id @unique @map("category_id")
+  id     String @id @unique @default(uuid()) @map("category_id")
   nombre String @unique
 
   film Film[]

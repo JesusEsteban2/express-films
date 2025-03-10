@@ -15,11 +15,3 @@ export interface UserRepo<T> {
     register: (data: T) => Promise<T>;
     login: (email: string, pass: string) => Promise<T>;
 }
-
-export interface Repository2<T> {
-    read: () => Promise<T[]>;
-    readById: (id: number) => Promise<T>;
-    create: (data: Omit<T, 'id'>) => Promise<T>;
-    update: (id: string, data: Partial<Omit<T, 'id'>>) => Promise<T>;
-    delete: (id: string) => Promise<T>;
-}

@@ -1,11 +1,11 @@
 import createDebug from 'debug';
-import type { Repository2 } from './repositorytype';
+import type { Repository } from './repositorytype';
 import { PrismaClient } from '@prisma/client';
 import { Category } from '@prisma/client';
 
 const debug = createDebug('category:repository:categories');
 
-export class CategoryPrismaRepo implements Repository2<Category> {
+export class CategoryPrismaRepo implements Repository<Category> {
     prisma: PrismaClient;
     constructor() {
         debug('Instance repo for category');
@@ -17,7 +17,7 @@ export class CategoryPrismaRepo implements Repository2<Category> {
         return rows;
     }
 
-    async readById(id: number): Promise<Category> {
+    async readById(id: string): Promise<Category> {
         const row = await this.prisma.category.findUniqueOrThrow({
             where: { id },
         });
@@ -33,7 +33,7 @@ export class CategoryPrismaRepo implements Repository2<Category> {
     }
 
     async update(
-        id: number,
+        id: string,
         data: Partial<Omit<Category, 'id'>>,
     ): Promise<Category> {
         const row = await this.prisma.category.update({
@@ -44,7 +44,7 @@ export class CategoryPrismaRepo implements Repository2<Category> {
         return row;
     }
 
-    async delete(id: number): Promise<Category> {
+    async delete(id: string): Promise<Category> {
         const row = await this.prisma.category.delete({
             where: { id },
         });
