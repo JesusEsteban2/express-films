@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Review } from '@prisma/client';
-import { Repository } from '../repo/repositorytype.js';
+import { Repository } from '../repos/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
 import createDebug from 'debug';
 import { ReviewCreateDTO, ReviewUpdateDTO } from '../DTO/review.dto.js';

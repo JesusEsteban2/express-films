@@ -1,15 +1,14 @@
 import { Router } from 'express';
 import createDebug from 'debug';
 import { FilmsController } from '../controllers/films.controller.js';
-import { FilmPrismaRepo } from '../repo/filmsrepository.js';
-import { ReviewRepo } from '../repo/review.repository.js';
+import { FilmPrismaRepo } from '../repos/filmsrepository.js';
+import { ReviewRepo } from '../repos/review.repository.js';
 import { ReviewsController } from '../controllers/review.controller.js';
 import { AuthInterceptor } from '../middleware/auth.interceptor.js';
-import { UserRepo } from '../repo/repositorytype.js';
-import { Role, User } from '@prisma/client';
-import { UserRepository } from '../repo/users.repo.js';
-import { UsersController } from '../controllers/users.controllers.js';
-import { CategoryPrismaRepo } from '../repo/categories.repo.js';
+import { Role } from '@prisma/client';
+import { UserRepository } from '../repos/users.repo.js';
+import { UsersController } from '../controllers/users.controller.js';
+import { CategoryPrismaRepo } from '../repos/categories.repo.js';
 import { CategoriesController } from '../controllers/category.controller.js';
 
 const debug = createDebug('movies:router:createRouters');
@@ -21,7 +20,7 @@ const auth = new AuthInterceptor(reviewRepo);
 const filmRepo = new FilmPrismaRepo();
 const filmsControl = new FilmsController(filmRepo);
 
-const userRepo: UserRepo<User> = new UserRepository();
+const userRepo: UserRepository = new UserRepository();
 const userController = new UsersController(userRepo);
 
 const categoriesRepo = new CategoryPrismaRepo();
@@ -133,10 +132,3 @@ export class CreateRouter {
         return categoriesRouter;
     }
 }
-
-// Sustituye a las líneas de app
-// app.get('/api/films', repoFilms.read);
-// app.get('/api/films/id', repoFilms.readById);
-// app.post('/api/films', repoFilms.create);
-// app.patch('/api/films/:id', repoFilms.update);
-// app.delete('/api/films/:id', repoFilms.delete);

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { AuthService } from '../services/auth.service.js';
 import { HttpError } from '../controllers/errors.controller.js';
 import createDebug from 'debug';
-import { ReviewRepo } from '../repo/review.repository.js';
+import { ReviewRepo } from '../repos/review.repository.js';
 
 const debug = createDebug('films:interceptors:auth');
 
