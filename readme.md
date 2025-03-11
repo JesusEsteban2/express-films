@@ -24,3 +24,8 @@ import {hash, compare} from 'bcryptjs';
 
 logger de Servidor
 paquete 'Morgan' o 'Winston' o 'Pino'
+
+Next (Framework para React (Biblioteca para interfaces de usuario)
+Angular (Framework de Node)
+
+Instalación Global de Angular.
