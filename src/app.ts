@@ -12,9 +12,19 @@ import {
 import { errorManager } from './controllers/errors.controller.js';
 import { MPayload } from './services/auth.service.js';
 import { CreateRouter } from './router/create.router.js';
+import { rateLimit } from 'express-rate-limit';
 
-// import { createProductsRouter } from './routers/products.router.js';
-// import { HomePage } from './views/pages/home-page.js';
+// Limiter Comiguration 3 req in 3 sec
+const limiter = rateLimit({
+    windowMs: 3000,
+    limit: 3,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        status: 429,
+        error: 'Too Many Requests',
+    },
+});
 
 // Expansión de interface Request
 declare module 'express' {
@@ -44,6 +54,9 @@ export const createApp = () => {
     if (!process.env.DEBUG) {
         app.use(morgan('dev'));
     }
+
+    // use midelware limiter for all request.
+    app.use(limiter);
 
     // Función middleware de express que habilita el parseo automático de los archivos json.
     // (https://expressjs.com/en/5x/api.html#express.json)

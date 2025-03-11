@@ -1,10 +1,9 @@
 import createDebug from 'debug';
-import type { UserRepo } from './repositorytype';
 import { PrismaClient, User } from '@prisma/client';
 
 const debug = createDebug('films:repository:films');
 
-export class UserRepository implements UserRepo<User> {
+export class UserRepository {
     prisma: PrismaClient;
     constructor() {
         debug('Instance repo for User');
@@ -18,7 +17,17 @@ export class UserRepository implements UserRepo<User> {
         return row;
     }
 
-    async login(email: string, password: string): Promise<User> {
+    async getByEmail(email: string): Promise<User | null> {
+        debug('Getting user by email:', email);
+        const user = await this.prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+        return user;
+    }
+
+    async login(email: string): Promise<User> {
         const row = await this.prisma.user.findUnique({
             where: { email },
         });
