@@ -35,7 +35,9 @@ export class AuthInterceptor {
 
         const token = authorization.split(' ')[1];
         try {
-            await AuthService.verifyToken(token);
+            const payload = await AuthService.verifyToken(token);
+            req.user = payload;
+            debug('User:', payload);
             next();
         } catch (err) {
             const newError = new HttpError(
@@ -49,8 +51,7 @@ export class AuthInterceptor {
 
     hasRole = (role: string) => {
         return (req: Request, _res: Response, next: NextFunction) => {
-            debug('hasRole');
-
+            debug('hasRole?');
             if (
                 !req.user ||
                 (req.user.role !== role && req.user.role !== Role.ADMIN)
@@ -63,7 +64,7 @@ export class AuthInterceptor {
                 next(newError);
                 return;
             }
-
+            debug('Role Ok');
             next();
         };
     };

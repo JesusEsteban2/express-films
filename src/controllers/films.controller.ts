@@ -3,6 +3,7 @@ import { Film } from '@prisma/client';
 import { Repository } from '../repos/repositorytype.js';
 import { AppResponse } from '../middleware/responseJson.js';
 import debug from 'debug';
+import { FilmCreateDTO } from '../DTO/films.dto.js';
 
 export class FilmsController {
     constructor(private repoFilms: Repository<Film>) {}
@@ -37,8 +38,9 @@ export class FilmsController {
 
     async post(req: Request, res: Response, next: NextFunction) {
         try {
-            const { body } = req.body;
-            const films = await this.repoFilms.create(body);
+            FilmCreateDTO.parse(req.body);
+            const newData: Film = req.body;
+            const films: Film = await this.repoFilms.create(newData);
             const data: AppResponse<Film> = {
                 data: [films],
                 error: '',
@@ -52,8 +54,10 @@ export class FilmsController {
     async patch(req: Request, res: Response, next: NextFunction) {
         try {
             const { id } = req.params;
-            const { body } = req.body;
-            const films = await this.repoFilms.update(id, body);
+            FilmCreateDTO.partial().parse(req.body);
+            const newData = req.body;
+            console.log('body: ', newData);
+            const films = await this.repoFilms.update(id, newData);
             const data: AppResponse<Film> = {
                 data: [films],
                 error: '',

@@ -78,3 +78,16 @@ user?:Payload;
 }
 
 HTML,CSS,Javascript,Angular, Typescript,NodeJS,Express,NestJs,Prisma, Zod, MySQL,MongoDB, Git, Github, Visual Studio Code, Postman, integración, vitest, Swagger.
+
+    {
+      "title": "The Dark Knight",
+      "description": null,
+      "releaseYear": 2008,
+      "rating": "9",
+      "director": "Christopher Nolan",
+      "duration": 152,
+      "poster": "https://www.imdb.com/title/tt0468569/",
+      "createdAt": "2025-03-10T18:44:15.913Z",
+      "updatedAt": null,
+      "id": "492c3e58-fdd7-11ef-8707-825b413442ac"
+    },
