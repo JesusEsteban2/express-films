@@ -14,6 +14,7 @@ export class FilmPrismaRepo implements Repository<Film> {
 
     async read(): Promise<Film[]> {
         const rows = await this.prisma.film.findMany();
+        console.log(rows);
         return rows;
     }
 
