@@ -29,3 +29,8 @@ Next (Framework para React (Biblioteca para interfaces de usuario)
 Angular (Framework de Node)
 
 Instalación Global de Angular.
+
+multer:
+
+npm i multer
+npm i -D @types/multer
